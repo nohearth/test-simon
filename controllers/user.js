@@ -5,7 +5,7 @@ async function createUser(req, res) {
     const user = await sUser.createUser(req.body)
     res.json(user)
   } catch (e) {
-    res.json({message: `Error: ${e}`})
+    res.json({message: e})
   }
 }
 

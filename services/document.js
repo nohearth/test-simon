@@ -1,5 +1,6 @@
 const sUser = require('./user')
 const sRecordDocument = require('./recordDocument')
+const { throwException } = require('../utils/validation')
 
 const User = require('../models').User
 const Document = require('../models').Document
@@ -8,7 +9,10 @@ const SharedDocument = require('../models').SharedDocument
 
 async function createDocument(data) {
   const user = await sUser.getUser(data.userId)
-  data.ownerName = user.name
+  if(!user) {
+    throwException(`The User with the ID ${data.userId} don't exits`)
+  }
+  data.ownerName = `${user.name} ${user.lastName}`
   
   const document = await Document.create(data)
   const recordData = {
@@ -28,6 +32,9 @@ async function getDocument(id) {
 
 async function updateDocument(id, data) {
   const document = await getDocument(id)
+  if(!document) {
+    throwException(`The Document with the ID ${id} don't exits`)
+  }
   const recordData = {
     documentId: document.id,
     description: 'UPDATED',
@@ -39,8 +46,13 @@ async function updateDocument(id, data) {
 
 async function sharedDocument(data) {
   const user = await sUser.getUser(data.userId)
+  if(!user) {
+    throwException(`The User with the ID ${data.userId} don't exits`)
+  }
   const document = await getDocument(data.documentId)
-  
+  if(!document) {
+    throwException(`The Document with the ID ${data.documentId} don't exits`)
+  }
   await document.addUser(user, { through: { selfGranted: false } })
 }
 
@@ -52,6 +64,9 @@ async function getAllDocumentByUser(id) {
       include: [Document]
     }]
   })
+  if(!document) {
+    throwException(`The User with the ID ${id} don't exits`)
+  }
   return document
 }
 
