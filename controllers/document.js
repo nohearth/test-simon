@@ -3,8 +3,8 @@ const sRecordDocument = require('../services/recordDocument')
 
 async function createDocument(req, res) {
   try {
-    const doc = await sDocument.createDocument(req.body)
-    res.json(doc)
+    await sDocument.createDocument(req.body)
+    res.json({message: 'Create success'})
   } catch (e) {
     res.json({message: e})
   }
@@ -12,8 +12,8 @@ async function createDocument(req, res) {
 
 async function updateDocument(req, res) {
   try {
-    const doc = await sDocument.updateDocument(req.params.id, req.body)
-    res.json({message: 'Success'})
+    await sDocument.updateDocument(req.params.id, req.body)
+    res.json({message: 'Update success'})
   } catch (e) {
     res.json({message: e})
   }
@@ -21,8 +21,27 @@ async function updateDocument(req, res) {
 
 async function getAllRecordByDoc(req, res) {
   try {
-    const doc = await sRecordDocument.getAllRecordByDoc(req.params.id)
-    res.json(doc)
+    const document = await sRecordDocument.getAllRecordByDoc(req.params.id)
+    res.json(document)
+  } catch (e) {
+    res.json({message: e})
+  }
+}
+
+async function sharedDocument(req, res) {
+  try {
+    await sDocument.sharedDocument(req.body)
+    res.json({message: 'Share success'})
+  } catch (e) {
+    
+    res.json({message: e})
+  }
+}
+
+async function getAllDocumentByUser(req, res) {
+  try {
+    const document = await sDocument.getAllDocumentByUser(req.params.id)
+    res.json(document)
   } catch (e) {
     res.json({message: e})
   }
@@ -31,5 +50,7 @@ async function getAllRecordByDoc(req, res) {
 module.exports = {
   createDocument,
   updateDocument,
-  getAllRecordByDoc
+  getAllRecordByDoc,
+  sharedDocument,
+  getAllDocumentByUser
 }

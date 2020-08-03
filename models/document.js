@@ -1,62 +1,41 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const db = require('../config/db')
+'use strict'
 
-//const User = require('./user') 
-const RecordDocument = require('./recordDocument')
+module.exports = (sequelize, DataTypes) => {
+  const Document = sequelize.define('Document', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    creationDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.UUID
+    },
+    ownerName: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'A'
+    }
+  }, {
+    tableName: 'document',
+    name: {
+      singular: 'document',
+      plural: 'documents'
+    }
+  })
 
-const Document = db.define('Document', {
-  id: {
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
-  },
-  ownerName: {
-    type: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        msg: `OwnerName can´t be empty.`
-      }
-    }
-  },
-  name: {
-    type: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        msg: `Name can´t be empty.`
-      }
-    }
-  },
-  category: {
-    type: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        msg: `Category can´t be empty.`
-      }
-    }
-  },
-  creationDate: {
-    type: DataTypes.DATEONLY,
-    validate: {
-      notEmpty: {
-        msg: `Date of creation can´t be empty.`
-      }
-    }
-  },
-  status: {
-    type: DataTypes.STRING,
-    defaultValue: 'A'
+  Document.associate = function (models) {
+    Document.hasMany(models.RecordDocument, {foreingKey: 'documentId'})
+    Document.belongsToMany(models.User, { through: models.SharedDocument })
+    Document.hasMany(models.SharedDocument, {foreingKey: 'documentId'})
   }
-}, {
-  tableName: 'document',
-  name: {
-    singular: 'document',
-    plural: 'documents'
-  }
-})
-
-Document.sync()
-//Document.belongsTo(User, {foreingKey: 'userId'})
-Document.hasMany(RecordDocument, {foreingKey: 'documentId'})
-//RecordDocument.belongsTo(Document, {foreingKey: 'documentId'})
-
-module.exports = Document
+  return Document
+}

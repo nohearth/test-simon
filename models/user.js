@@ -1,43 +1,33 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const db = require('../config/db')
+'use strict'
 
-//const Document = require('./document')
-
-const User = db.define('user', {
-  id: {
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
-  },
-  name: {
-    type: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        msg: `Name can´t be empty.`
-      }
+module.exports = (sequelize, DataTypes) => {
+  
+  const User = sequelize.define('User', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'A'
     }
-  },
-  lastName: {
-    type: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        msg: `Last name can´t be empty.`
-      }
+  }, {
+    tableName: 'user',
+    name: {
+      singular: 'user',
+      plural: 'users'
     }
-  },
-  status: {
-    type: DataTypes.STRING,
-    defaultValue: 'A'
-  }
-}, {
-  tableName: 'user',
-  name: {
-    singular: 'user',
-    plural: 'users'
-  }
-})
+  })
 
-User.sync()
-//User.hasMany(Document, {foreingKey: 'userId', sourceKey: 'id'})
+  User.associate = function (models) {
+    User.belongsToMany(models.Document, { through: models.SharedDocument })
+    User.hasMany(models.SharedDocument, {foreingKey: 'userId'})
+    User.hasMany(models.Document, {foreingKey: 'userId'})
+  }
 
-module.exports = User
+  return User
+}

@@ -1,12 +1,10 @@
+const migrator = require('./config/migrator')
 const express = require('express')
 const { json } = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+const db = require('./models')
 
-//Database
-const db = require('./config/db')
-
-//Port
 const PORT = process.env.PORT || 3000
 
 const app = express()
@@ -19,13 +17,17 @@ app.get('/',(req, res) =>{
   res.send('Connected')
 })
 
-//Routes
 require('./routes')(app)
 
 //Test DB
-db.authenticate()
+db.sequelize
+  .authenticate()
   .then(() => {
-    console.log('Database connected...')
-    app.listen(PORT, console.log(`Server started on port ${PORT}`))
+    migrator.autoMigrate()
+      .then(() => {
+        console.log('Database connected...')
+        app.listen(PORT, console.log(`Server started on port ${PORT}`))
+      })
+      .catch(err => { console.error(err) })
   })
   .catch(err => console.log(`Error: ${err}`))

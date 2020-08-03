@@ -1,31 +1,23 @@
-const { Sequelize, DataTypes } = require('sequelize')
-const db = require('../config/db')
-const Document = require('./document')
+'use strict'
 
-const RecordDocument = db.define('RecordDocument', {
-  id: {
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
-  },
-  description: {
-    type: DataTypes.STRING
-  },
-  recordDate: {
-    type: DataTypes.DATEONLY
-  },
-  documentId: {
-    type: DataTypes.UUID
+module.exports = (sequelize, DataTypes) => {
+  const RecordDocument = sequelize.define('RecordDocument', {
+    description: {
+      type: DataTypes.STRING
+    },
+    recordDate: {
+      type: DataTypes.DATEONLY
+    }
+  }, {
+    timestamps: false,
+    tableName: 'recordDocument',
+    name: {
+      singular: 'recordDocument',
+      plural: 'recordDocuments'
+    }
+  })
+  RecordDocument.associate = function (models) {
+    RecordDocument.belongsTo(models.Document, {foreingKey: 'documentId'})
   }
-}, {
-  tableName: 'recordDocument',
-  name: {
-    singular: 'recordDocument',
-    plural: 'recordDocuments'
-  }
-})
-
-RecordDocument.sync()
-//
-
-module.exports = RecordDocument
+  return RecordDocument
+}
