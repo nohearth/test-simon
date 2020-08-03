@@ -1,6 +1,8 @@
-const Document = require('../models/document')
+const sUser = require('./user')
 const sRecordDocument = require('./recordDocument')
-//const db = require('../config/db')
+
+const Document = require('../models').Document
+const SharedDocument = require('../models').SharedDocument
 
 async function createDocument(data) {
   const doc = await Document.create(data)
@@ -10,7 +12,6 @@ async function createDocument(data) {
     recordDate: doc.createdAt
   }
   await sRecordDocument.createRecord(recordData)
-  //return doc
 }
 
 async function getDocument(id) {
@@ -31,7 +32,16 @@ async function updateDocument(id, data) {
   return doc.update(data)
 }
 
+async function sharedDocument(data) {
+  const user = await sUser.getUser(data.userId)
+  console.log(user)
+  const doc = await getDocument(data.documentId)
+  console.log(doc)
+  await doc.addUser(user, { through: { selfGranted: false } })
+}
+
 module.exports = {
   createDocument,
-  updateDocument
+  updateDocument,
+  sharedDocument
 }

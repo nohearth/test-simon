@@ -1,5 +1,4 @@
-const RecordDocument = require('../models/recordDocument')
-const Document = require('../models/document')
+const RecordDocument = require('../models').RecordDocument
 
 async function createRecord(data) {
   console.log(data)
@@ -11,7 +10,6 @@ async function getAllRecordByDoc(idDoc) {
     where: { documentId: idDoc},
     order: [['createdAt','asc']]
   })
-  console.log(record)
   return record
 }
 
