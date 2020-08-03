@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
     },
-    ownerName: {
-      type: DataTypes.STRING
-    },
     name: {
       type: DataTypes.STRING
     },
@@ -19,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     creationDate: {
       type: DataTypes.DATEONLY
+    },
+    userId: {
+      type: DataTypes.UUID
+    },
+    ownerName: {
+      type: DataTypes.STRING
     },
     status: {
       type: DataTypes.STRING,

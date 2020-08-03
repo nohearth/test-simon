@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     User.belongsToMany(models.Document, { through: models.SharedDocument })
     User.hasMany(models.SharedDocument, {foreingKey: 'userId'})
+    User.hasMany(models.Document, {foreingKey: 'userId'})
   }
   User.sync()
   return User

@@ -1,7 +1,7 @@
 const RecordDocument = require('../models').RecordDocument
 
+
 async function createRecord(data) {
-  console.log(data)
   await RecordDocument.create(data)
 }
 

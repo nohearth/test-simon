@@ -1,9 +1,8 @@
 const User = require('../models').User
 
+
 async function createUser(data) {
-  
   const user = await User.create(data)
-  console.log(data)
   return user
 }
 
