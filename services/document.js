@@ -73,5 +73,6 @@ module.exports = {
   createDocument,
   updateDocument,
   sharedDocument,
+  getDocument,
   getAllDocumentByUser
 }

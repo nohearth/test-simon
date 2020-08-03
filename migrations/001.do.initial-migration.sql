@@ -11,6 +11,7 @@ CREATE TABLE public.document (
   id SERIAL PRIMARY KEY,
   name character varying(255),
   category character varying(255),
+  "urlDocument" character varying(255),
   "creationDate" date,
   status character varying(255),
   "createdAt" timestamp with time zone NOT NULL,

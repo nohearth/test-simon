@@ -38,6 +38,14 @@ async function sharedDocument(req, res) {
   }
 }
 
+async function getDocument(req, res) {
+  try {
+    const document = await sDocument.getDocument(req.params.id)
+    res.json(document)
+  } catch (e) {
+    res.json({message: e})
+  }
+}
 async function getAllDocumentByUser(req, res) {
   try {
     const document = await sDocument.getAllDocumentByUser(req.params.id)
@@ -52,5 +60,6 @@ module.exports = {
   updateDocument,
   getAllRecordByDoc,
   sharedDocument,
+  getDocument,
   getAllDocumentByUser
 }
