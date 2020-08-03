@@ -1,4 +1,5 @@
 const RecordDocument = require('../models').RecordDocument
+const Document = require('../models').Document
 
 
 async function createRecord(data) {
@@ -8,7 +9,8 @@ async function createRecord(data) {
 async function getAllRecordByDoc(idDoc) {
   const record = await RecordDocument.findAll({
     where: { documentId: idDoc},
-    order: [['createdAt','asc']]
+    include: [Document],
+    order: [['recordDate','asc']]
   })
   return record
 }

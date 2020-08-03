@@ -1,10 +1,9 @@
 const sUser = require('./user')
 const sRecordDocument = require('./recordDocument')
-const { throwException } = require('../utils/validation')
-
 const User = require('../models').User
 const Document = require('../models').Document
 const SharedDocument = require('../models').SharedDocument
+const { throwException } = require('../utils/validation')
 
 
 async function createDocument(data) {

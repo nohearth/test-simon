@@ -1,14 +1,8 @@
 'use strict'
-const { Sequelize } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   
   const User = sequelize.define('User', {
-    id: {
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: Sequelize.UUIDV4,
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -34,6 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.SharedDocument, {foreingKey: 'userId'})
     User.hasMany(models.Document, {foreingKey: 'userId'})
   }
-  User.sync()
+
   return User
 }

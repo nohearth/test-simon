@@ -1,3 +1,4 @@
+const migrator = require('./config/migrator')
 const express = require('express')
 const { json } = require('express')
 const morgan = require('morgan')
@@ -22,7 +23,11 @@ require('./routes')(app)
 db.sequelize
   .authenticate()
   .then(() => {
-    console.log('Database connected...')
-    app.listen(PORT, console.log(`Server started on port ${PORT}`))
+    migrator.autoMigrate()
+      .then(() => {
+        console.log('Database connected...')
+        app.listen(PORT, console.log(`Server started on port ${PORT}`))
+      })
+      .catch(err => { console.error(err) })
   })
   .catch(err => console.log(`Error: ${err}`))

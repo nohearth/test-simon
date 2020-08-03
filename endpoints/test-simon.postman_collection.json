@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "eef960f4-00fc-4ea5-8f2e-d6f18bb8af64",
+		"name": "test-simon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "document",
+			"item": [
+				{
+					"name": "get all documents (owner and shared)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWVmMDA0ZDEyMDNlMjE5ZDg4YTczMTQiLCJmaXJzdE5hbWUiOiJzaW1vbiIsImxhc3ROYW1lIjoidmVsYXNxdWV6IiwiZW1haWwiOiJzaW1vdjMxMDBAZ21haWwuY29tIiwiaWF0IjoxNTkyNzMxNjUyfQ.4oH3-0r4QIqtu68vi5aFXT3zvjma2es10Jr9aLG9v_k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/document/all/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"document",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWVmMDA0ZDEyMDNlMjE5ZDg4YTczMTQiLCJmaXJzdE5hbWUiOiJzaW1vbiIsImxhc3ROYW1lIjoidmVsYXNxdWV6IiwiZW1haWwiOiJzaW1vdjMxMDBAZ21haWwuY29tIiwiaWF0IjoxNTkyNzMxNjUyfQ.4oH3-0r4QIqtu68vi5aFXT3zvjma2es10Jr9aLG9v_k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"name\": \"\",\r\n    \"category\": \"\",\r\n    \"creationDate\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/document/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"document",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "share document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWVmMDA0ZDEyMDNlMjE5ZDg4YTczMTQiLCJmaXJzdE5hbWUiOiJzaW1vbiIsImxhc3ROYW1lIjoidmVsYXNxdWV6IiwiZW1haWwiOiJzaW1vdjMxMDBAZ21haWwuY29tIiwiaWF0IjoxNTkyNzMxNjUyfQ.4oH3-0r4QIqtu68vi5aFXT3zvjma2es10Jr9aLG9v_k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"documentId\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/document/share/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"document",
+								"share",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get history record by document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/document/record/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"document",
+								"record",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit document",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"\",\r\n    \"name\": \"\",\r\n    \"category\": \" \",\r\n    \"creationDate\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/document/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"document",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWVmMDA0ZDEyMDNlMjE5ZDg4YTczMTQiLCJmaXJzdE5hbWUiOiJzaW1vbiIsImxhc3ROYW1lIjoidmVsYXNxdWV6IiwiZW1haWwiOiJzaW1vdjMxMDBAZ21haWwuY29tIiwiaWF0IjoxNTkyNzMxNjUyfQ.4oH3-0r4QIqtu68vi5aFXT3zvjma2es10Jr9aLG9v_k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"lastName\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

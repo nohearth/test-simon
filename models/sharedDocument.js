@@ -5,12 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     shareStatus: {
       type: DataTypes.STRING,
       defaultValue: 'SHARED'
-    },
-    documentId: {
-      type: DataTypes.UUID
-    },
-    userId: {
-      type: DataTypes.UUID
     }
   }, {
     timestamps: false,
@@ -25,6 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     SharedDocument.belongsTo(models.Document, {foreingKey: 'documentId'})
     SharedDocument.belongsTo(models.User, {foreingKey: 'userId'})
   }
-  SharedDocument.sync()
+
   return SharedDocument
 }
